@@ -1,0 +1,49 @@
+.app-container {
+  display: flex;
+  justify-content: space-between;
+  /* padding: 20px; */
+}
+
+.task-manager {
+  width: 100%;
+  max-width: 500px;
+  min-width: 250px;
+  padding: 20px;
+  height: 100vh;
+  background: #333;
+  color: #fff;
+}
+
+.draggable-task {
+  cursor: grab;
+  width: 100%;
+}
+
+.task-action-container {
+  width: 100%;
+  max-width: 130px;
+}
+
+.task-action-container button {
+  width: 100%;
+}
+
+.calendar {
+  padding-left: 10px;
+  height: 95vh;
+  overflow-y: scroll;
+}
+
+.calendar-day {
+  background-color: #f8f9fa;
+  min-height: 165px;
+  max-height: 165px;
+  overflow-y: auto;
+}
+
+.event {
+  background-color: #85c1e9;
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 3px;
+}
