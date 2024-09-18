@@ -28,7 +28,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="app-container">
+    <div className="flex flex-row gap-4 ">
       <TaskManager
         tasks={tasks}
         editTask={editTasks}

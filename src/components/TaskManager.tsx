@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button, Form, ListGroup, InputGroup } from "react-bootstrap";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 export interface Task {
   id: number;
@@ -47,75 +48,76 @@ const TaskManager = (props: Props) => {
   };
 
   return (
-    <div className="task-manager">
-      <h2 className="mb-4">Task Manager</h2>
+    <div className="px-6 py-8 bg-gray-900 text-white h-screen">
+      <h2 className="text-3xl font-semibold mb-6">Task Manager</h2>
 
-      <Form className="mb-3">
-        <Form.Group controlId="formTaskName">
-          <InputGroup>
-            <Form.Control
-              type="text"
-              placeholder="Add new task"
-              value={taskName}
-              onChange={(e) => setTaskName(e.target.value)}
-            />
-            <Button variant="primary" onClick={handleAddTask}>
-              Add Task
-            </Button>
-          </InputGroup>
-        </Form.Group>
-      </Form>
+      <div className="flex items-center mb-6">
+        <Input
+          type="text"
+          placeholder="Add new task"
+          value={taskName}
+          className="text-lg h-10"
+          onChange={(e) => setTaskName(e.target.value)}
+        />
+        <Button
+          variant={"secondary"}
+          size={"lg"}
+          onClick={handleAddTask}
+          className=" px-4 py-2 rounded-md"
+        >
+          Add Task
+        </Button>
+      </div>
 
-      <ListGroup>
+      <ul className="flex flex-col gap-4">
         {props.tasks.map((task) => (
-          <ListGroup.Item
+          <li
             key={task.id}
-            className="d-flex justify-content-between align-items-center"
+            className="flex items-center justify-between p-2 border bg-gray-400 text-black hover:bg-gray-600 hover:text-white border-gray-300 rounded-md"
           >
             {editingTaskId === task.id ? (
-              <>
-                <Form.Control
+              <div className="flex items-center justify-between w-full">
+                <Input
                   type="text"
                   value={editingTaskName}
                   onChange={(e) => setEditingTaskName(e.target.value)}
-                  className="me-2"
+                  className="border border-gray-300 rounded-md p-2 mr-2 w-100 w-full"
                 />
-                <Button variant="success" size="sm" onClick={handleSaveEdit}>
+                <Button
+                  onClick={handleSaveEdit}
+                  className="bg-green-600 text-white px-3 py-1 rounded-md"
+                >
                   Save
                 </Button>
-              </>
+              </div>
             ) : (
-              <>
+              <div className="flex justify-between items-center w-full pl-2">
                 <div
                   draggable
                   onDragStart={(e) => handleDragStart(e, task.id)}
-                  className="draggable-task"
+                  className="mr-2 cursor-pointer w-full font-semibold"
                 >
                   {task.name}
                 </div>
-                <div className="row task-action-container">
+                <div className="flex">
                   <Button
-                    variant="outline-secondary"
-                    size="sm"
-                    className="me-2 col"
                     onClick={() => handleEditTask(task)}
+                    className="bg-gray-300 text-black px-3 py-1 rounded-md mr-2 hover:text-white"
                   >
                     Edit
                   </Button>
                   <Button
-                    variant="danger"
-                    size="sm"
-                    className="col"
                     onClick={() => props.deleteTask(task.id)}
+                    className="bg-red-500 text-white px-3 py-1 rounded-md"
                   >
                     Delete
                   </Button>
                 </div>
-              </>
+              </div>
             )}
-          </ListGroup.Item>
+          </li>
         ))}
-      </ListGroup>
+      </ul>
     </div>
   );
 };
